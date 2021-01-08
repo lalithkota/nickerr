@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title= title
+
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+  body
+
+    #navbar
+      a#navbar_title #{title}
+
+      a#navbar_body Home
+      a#navbar_body Else
+
+      a#navbar_foot Me
+    block content

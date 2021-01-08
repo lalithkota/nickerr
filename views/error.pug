@@ -1,0 +1,5 @@
+extends layout
+
+block content
+  #render_error #{error.status} #{message}
+  pre #{error.stack}

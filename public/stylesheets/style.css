@@ -1,0 +1,51 @@
+#navbar {
+  background-color: lightgrey;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 100%;
+  overflow : hidden;
+  white-space: nowrap;
+  position: fixed;
+  top: 0;
+}
+#navbar_title{
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size : 28px;
+  font-family: Helvetica Neue, Lucida Grande;
+  color: grey;
+}
+#navbar_body{
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size : 23px;
+  font-family: Helvetica Neue, Lucida Grande;
+  color: grey;
+}
+#navbar_foot{
+  right : 0;
+  position: fixed;
+  padding-left: 10px;
+  padding-right: 20px;
+  font-size : 23px;
+  font-family: Helvetica Neue, Lucida Grande;
+  color: grey;
+}
+
+body {
+  margin: 0;
+  padding-top: 80px;
+}
+
+#nicker{
+  margin-left:15%;
+  font-size : 20px;
+  font-family: Helvetica Neue, Lucida Grande;
+}
+
+#render_error{
+  text-align: center;
+  font-size : 24px;
+  font-family: Helvetica Neue, Lucida Grande;
+  color : blue;
+}
