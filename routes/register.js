@@ -1,6 +1,5 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var passport = require('passport');
 var Zebra = require('../models/zebra');
 var LocalStrategy = require('passport-local');
 
@@ -18,35 +17,53 @@ var generic_info = {
   'register_error_msg':'',
 };
 
-passport.use('register-local',new LocalStrategy(
-  function(username, password, done) {
-    Zebra.findOne({ username: username }, function (err, user) {
-      if (err) {return done(err); }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'User With Name Already exists' });
-      }
-      return done(null, user, { message: 'Account Already Exists. Logging In.' });
-    });
-  }
-));
-
 router.get('/',
   function(req, res, next) {
+    if (req.isAuthenticated()){
+      res.redirect('/home');
+      return;
+    }
+    generic_info['register_error_msg'] = req.flash('error');
     res.render('register', generic_info);
   }
 );
 
-router.post('/', passport.authenticate('register-local',{successRedirect: '/home'}), function(req,res,next){
-  var new_user = new Zebra({Name : req.body.Name, username: req.body.username, password : req.body.password, followings : req.body.username_r, followers : req.body.username_r,});
+router.post('/', function(req,res,next){
+  if(req.body.username==='' || req.body.Name==='' || req.body.password===''){
+    generic_info['register_error_msg'] = 'Missing Credentials';
+    res.render('register', generic_info);
+    return;
+  }
+  if(req.body.name[0]=='@'){
+    // Not allowed
+  }
+  if(req.body.username.split(' ').length>1 || req.body.username.split(',').length>1){
+    //Not allowed
+  }
+  Zebra.findOne({ username: req.body.username }, function (err, user) {
+    if (err) {
+      generic_info['register_error_msg'] = 'Error reading database. Or some other Error';
+      res.render('register', generic_info);
+    }
+    else if (!user){
+      var new_user = new Zebra({Name : req.body.Name, username: req.body.username, password : req.body.password, followings : req.body.username_r, followers : req.body.username_r,});
 
-  console.log('New user');
-  console.log(new_user);
-  new_user.save(function(err,users){
-    if (err){
-      console.error('Unable to add to database');
-      return console.error(err);
+      console.log('New user');
+      new_user.save(function(err,users){
+        if (err){
+          console.error('Unable to add to database');
+          return console.error(err);
+        }
+        console.log(users);
+      });
+      req.flash('error','User Creation Success login again');
+      res.redirect('/login');
+    }
+    else if (!user.validPassword(req.body.password)) {
+      generic_info['register_error_msg'] = 'User With Name Already exists';
+      res.render('register', generic_info);
     }
   });
-}, passport.authenticate('register-local',{successRedirect: '/home'}));
+});
 
 module.exports = router;

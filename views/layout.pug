@@ -10,8 +10,7 @@ html
     #navbar
       a#navbar_title #{title}
 
-      a#navbar_body Home
-      a#navbar_body Else
+      a#navbar_body(href='/home') #{home_name}
 
-      a#navbar_foot Me
+      a#navbar_foot #{users_Name}
     block content

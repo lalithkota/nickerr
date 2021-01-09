@@ -1,4 +1,14 @@
 extends layout
 
 block content
-  #nicker Welcome to #{title}
+  #nicker
+    form(method='post', style='padding:12px')
+      textarea#nicker_input_big(type='text', name='nicker_text', placeholder = nicker_text_placeholder)
+
+      input(type='submit',name='nicker_submit', value= submit_nicker_text)
+
+  for item in nickers_list
+    //for item2 in my_followers_list
+    #nicker #{item.content} - #{item.user}
+      //if item2 === item.user
+        //#nicker #{item.content}

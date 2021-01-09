@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const zebraSchema = new mongoose.Schema({
+var zebraSchema = new mongoose.Schema({
     username : String,
     Name : String,
     password : String,
@@ -9,7 +9,10 @@ const zebraSchema = new mongoose.Schema({
 });
 
 // any methods
+zebraSchema.methods.validPassword = function(password){
+  return password=== this.password;
+}
 
-const Zebra = mongoose.model('Zebra',zebraSchema);
+var Zebra = mongoose.model('Zebra',zebraSchema);
 
 module.exports = Zebra;

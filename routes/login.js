@@ -35,10 +35,21 @@ passport.use(new LocalStrategy(
   }
 ));
 
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  Zebra.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
 router.get('/',
   function(req, res, next) {
     if (req.isAuthenticated()){
       res.redirect('/home');
+      return;
     }
     var msgs = req.flash('error');
     generic_info['login_error_msg'] = msgs[msgs.length - 1];
