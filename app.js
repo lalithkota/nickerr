@@ -8,7 +8,8 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 var passport = require('passport');
 
-mongoose.connect('mongodb://localhost/nickerr_db', { useNewUrlParser: true , useUnifiedTopology: true } , function(err){
+
+mongoose.connect('mongodb+srv://' + process.env.MONGODB_USERNAME + ':' + process.env.MONGODB_PASS_KEY + '@nickerr-cluster0.t8l8b.mongodb.net/nickerr_db?retryWrites=true&w=majority', { useNewUrlParser: true , useUnifiedTopology: true } , function(err){
   if (err){
     console.error('database not found');
     console.error('Wont be able to do database operations');

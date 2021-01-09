@@ -34,12 +34,12 @@ router.post('/', function(req,res,next){
     res.render('register', generic_info);
     return;
   }
-  if(req.body.name[0]=='@'){
-    // Not allowed
-  }
-  if(req.body.username.split(' ').length>1 || req.body.username.split(',').length>1){
-    //Not allowed
-  }
+  // if(req.body.name[0]=='@'){
+  //   Not allowed
+  // }
+  // if(req.body.username.split(' ').length>1 || req.body.username.split(',').length>1){
+  //   Not allowed
+  // }
   Zebra.findOne({ username: req.body.username }, function (err, user) {
     if (err) {
       generic_info['register_error_msg'] = 'Error reading database. Or some other Error';
