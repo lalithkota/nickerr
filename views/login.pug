@@ -5,6 +5,7 @@ block content
     p Login
     #login_error #{login_error_msg}
     form(method='post')
+      input(type='hidden', name='login_register', value='l')
       input(type='username', name='username', placeholder = username_placeholder)
       input(type='password', name='password', placeholder = password_placeholder)
       input(type='submit',name='login_submit', value= submit_text)
@@ -12,8 +13,9 @@ block content
     p Register
     #login_error #{register_error_msg}
     form(method='post')
-      input(type='text', placeholder = name_placeholder_r)
-      input(type='username', placeholder = username_placeholder_r)
-      input(type='password', placeholder = password_placeholder_r)
-      input(type='password', placeholder = repassword_placeholder_r)
+      input(type='hidden', name='login_register', value='r')
+      input(type='text', name='name_r', placeholder = name_placeholder_r)
+      input(type='username',name='username_r', placeholder = username_placeholder_r)
+      input(type='password',name='password_r', placeholder = password_placeholder_r)
+      input(type='password',name='repassword_r' , placeholder = repassword_placeholder_r)
       input(type='submit',name='register_submit', value= submit_text_r)

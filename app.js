@@ -6,7 +6,6 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var passport = require('passport');
-var LocalStrategy = require('passport-local');
 
 mongoose.connect('mongodb://localhost/nickerr_db', { useNewUrlParser: true , useUnifiedTopology: true } , function(err){
   if (err){
@@ -19,22 +18,6 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log('DATABASE DONE');
 });
-
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function (err, user) {
-      console.log('Finding one user');
-      if (err) {return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'u' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'p' });
-      }
-      return done(null, user);
-    });
-  }
-));
 
 var app = express();
 
@@ -50,17 +33,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(passport.initialize());
 
+var Nicker = require('./models/nicker');
+var Zebra = require('./models/zebra');
+
 var indexRouter = require('./routes/index');
 var homeRouter = require('./routes/home');
-var usersRouter = require('./routes/users');
+var zebraRouter = require('./routes/zebras');
 var loginRouter = require('./routes/login');
-
-var Nicker = require('./models/nicker');
 
 app.use('/', indexRouter);
 app.use('/home', homeRouter);
 app.use('/login', loginRouter);
-app.use('/users', usersRouter);
+app.use('/zebras', zebraRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
