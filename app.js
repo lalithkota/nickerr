@@ -11,7 +11,7 @@ var LocalStrategy = require('passport-local');
 mongoose.connect('mongodb://localhost/nickerr_db', { useNewUrlParser: true , useUnifiedTopology: true } , function(err){
   if (err){
     console.error('database not found');
-    throw err;
+    console.error('Wont be able to do database operations');
   }
 });
 const db = mongoose.connection;
