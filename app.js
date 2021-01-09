@@ -2,7 +2,8 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var session = require('express-session');
+var flash = require('express-flash');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -29,9 +30,12 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(session({ secret: 'itsasecret', resave : false , saveUninitialized : false }));
+app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(passport.initialize());
+app.use(passport.session());
 
 var Nicker = require('./models/nicker');
 var Zebra = require('./models/zebra');
@@ -40,10 +44,12 @@ var indexRouter = require('./routes/index');
 var homeRouter = require('./routes/home');
 var zebraRouter = require('./routes/zebras');
 var loginRouter = require('./routes/login');
+var registerRouter = require('./routes/register');
 
 app.use('/', indexRouter);
 app.use('/home', homeRouter);
 app.use('/login', loginRouter);
+app.use('/register', registerRouter);
 app.use('/zebras', zebraRouter);
 
 // catch 404 and forward to error handler

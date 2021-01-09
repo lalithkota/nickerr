@@ -3,11 +3,10 @@ extends index.pug
 block content
   #nicker
     p #{register_heading}
-    button#nvbar_button(onclick='location.href = \'/register\'') #{register_button_text}
-
-    p #{login_heading}
-    #login_error #{login_error_msg}
+    #login_error #{register_error_msg}
     form(method='post')
+      input(type='text', name='Name', placeholder = name_placeholder)
       input(type='username', name='username', placeholder = username_placeholder)
       input(type='password', name='password', placeholder = password_placeholder)
+      input(type='password', name='repassword', placeholder = repassword_placeholder)
       input(type='submit',name='login_submit', value= submit_text)
