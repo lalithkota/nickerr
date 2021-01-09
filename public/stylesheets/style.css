@@ -49,3 +49,18 @@ body {
   font-family: Helvetica Neue, Lucida Grande;
   color : blue;
 }
+
+#nvbar_button{
+  padding : 8px;
+  font-size:14px;
+  background-color: blue;
+  color : white;
+  border-radius: 8px;
+  border: 0;
+}
+
+#login_error{
+  color:red;
+  font-size : 15px;
+  font-family: Helvetica Neue, Lucida Grande;
+}

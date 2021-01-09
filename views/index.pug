@@ -1,4 +1,17 @@
-extends layout
+doctype html
+html
+  head
+    title= title
 
-block content
-  #nicker Welcome to #{title}
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+  body
+
+    #navbar
+      a#navbar_title #{title}
+
+      a#navbar_foot
+        button#nvbar_button(onclick='location.href = \'/home\'') #{navbar_bottom_name}
+    block content
+      #nicker
+        p Welcome to #{title}. Get started with the dashboard.

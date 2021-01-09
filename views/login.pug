@@ -1,0 +1,19 @@
+extends index.pug
+
+block content
+  #nicker
+    p Login
+    #login_error #{login_error_msg}
+    form(method='post')
+      input(type='username', name='username', placeholder = username_placeholder)
+      input(type='password', name='password', placeholder = password_placeholder)
+      input(type='submit',name='login_submit', value= submit_text)
+
+    p Register
+    #login_error #{register_error_msg}
+    form(method='post')
+      input(type='text', placeholder = name_placeholder_r)
+      input(type='username', placeholder = username_placeholder_r)
+      input(type='password', placeholder = password_placeholder_r)
+      input(type='password', placeholder = repassword_placeholder_r)
+      input(type='submit',name='register_submit', value= submit_text_r)

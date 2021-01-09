@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Nickerr' });
+  res.render('index', { title: 'Nickerr', navbar_bottom_name : 'Dashboard' });
 });
 
 module.exports = router;
