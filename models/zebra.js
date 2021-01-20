@@ -4,8 +4,9 @@ var zebraSchema = new mongoose.Schema({
     username : String,
     Name : String,
     password : String,
-    followings : String,
+    following : String,
     followers : String,
+    liked_nicks : String,
 });
 
 // any methods

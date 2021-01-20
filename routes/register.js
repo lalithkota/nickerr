@@ -46,7 +46,14 @@ router.post('/', function(req,res,next){
       res.render('register', generic_info);
     }
     else if (!user){
-      var new_user = new Zebra({Name : req.body.Name, username: req.body.username, password : req.body.password, followings : req.body.username_r, followers : req.body.username_r,});
+      var new_user = new Zebra({
+        Name : req.body.Name,
+        username: req.body.username,
+        password : req.body.password,
+        following : req.body.username,
+        followers : req.body.username,
+        followers : ",",
+      });
 
       console.log('New user');
       new_user.save(function(err,users){

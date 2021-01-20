@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 
 
-mongoose.connect('mongodb+srv://' + process.env.MONGODB_USERNAME + ':' + process.env.MONGODB_PASS_KEY + '@nickerr-cluster0.t8l8b.mongodb.net/nickerr_db?retryWrites=true&w=majority', { useNewUrlParser: true , useUnifiedTopology: true } , function(err){
+mongoose.connect( process.env.MONGO_DB_URL_WITH_PASS, { useNewUrlParser: true , useUnifiedTopology: true } , function(err){
   if (err){
     console.error('database not found');
     console.error('Wont be able to do database operations');
@@ -62,7 +62,13 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = {};
+  if (req.app.get('env') === 'development'){
+    res.locals.error = err;
+  }
+  else{
+    if(err.status === 404) res.locals.message = '404 ' + res.locals.message;
+  }
 
   // render the error page
   res.status(err.status || 500);

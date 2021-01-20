@@ -8,7 +8,6 @@ block content
       input(type='submit',name='nicker_submit', value= submit_nicker_text)
 
   for item in nickers_list
-    //for item2 in my_followers_list
-    #nicker #{item.content} - #{item.user}
-      //if item2 === item.user
-        //#nicker #{item.content}
+    #nicker
+      a(style='font-size:27px') #{item.user}
+      p #{item.content}

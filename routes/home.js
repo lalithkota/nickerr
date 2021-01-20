@@ -9,7 +9,14 @@ router.get('/',
       res.redirect('/login');
     }
     else{
-      Nicker.find({} , function(err, result){
+      Nicker.find({
+        user : {
+          "$in" : String(req.user.following).split(','),
+        },
+      },
+      function(err, result){
+        if(err) return handleError(err);
+
         res.render('home', {
           title: 'Nickerr',
           home_name: 'Home',
@@ -35,7 +42,15 @@ router.post('/',function(req, res, next){
       return console.error(err);
     }
 
-    var new_nicker = new Nicker({_id : count, content : req.body.nicker_text, user : req.user.username, date:'0', time:'0' });
+    var new_nicker = new Nicker({
+      _id : count,
+      content : req.body.nicker_text,
+      user : req.user.username,
+      date:'0',
+      time:'0',
+      reply_to : -1,
+      likers : ',',
+    });
     new_nicker.save(function(err, nickers){
       if (err){
         console.error('Unable to add to database');

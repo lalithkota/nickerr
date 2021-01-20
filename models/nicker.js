@@ -6,6 +6,8 @@ const nickerSchema = new mongoose.Schema({
     user : String,
     date : String,
     time : String,
+    reply_to : Number,
+    likers : String,
 });
 
 // any methods
