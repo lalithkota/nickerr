@@ -11,3 +11,11 @@ block content
     #nicker
       a(style='font-size:27px') #{item.user}
       p #{item.content}
+      button#like_button_id(class='like_button active', onclick='like_click()') Like
+
+  script.
+    function like_click(){
+      var button = document.getElementById('like_button_id');
+      button.className = button.className.replace(" active","");
+      button.innerText = 'Unlike';
+    }

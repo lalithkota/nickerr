@@ -51,7 +51,7 @@ app.use('/', indexRouter);
 app.use('/home', homeRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
-app.use('/zebras', zebraRouter);
+app.use('/zeb', zebraRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

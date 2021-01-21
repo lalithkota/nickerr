@@ -1,4 +1,16 @@
 extends layout
 
 block content
-  
+  p(style='text-align:center; font-size:35px; margin:12px') #{zebra_result.Name}
+  p(style='text-align:center; font-size:20px; margin_down:9px') Username: #{zebra_result.username}
+  p(style='text-align:center; font-size:21px; margin:6px') Followers: #{zebra_result.followers}
+  p(style='text-align:center; font-size:21px; margin:6px') Followers: #{zebra_result.following}
+  p(style='text-align:center; font-size:21px; margin:6px')
+    button#follow_button_id(style='font-size:25px', class='like_button active', onclick='follow_click()') Follow
+
+  script.
+    function follow_click(){
+      var button = document.getElementById('follow_button_id');
+      button.className = button.className.replace(" active","");
+      button.innerText = 'Unfollow';
+    }

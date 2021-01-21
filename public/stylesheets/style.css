@@ -75,3 +75,12 @@ body {
   font-size : 15px;
   font-family: Helvetica Neue, Lucida Grande;
 }
+
+.like_button{
+  background-color: black;
+  color : white;
+}
+.like_button.active{
+  background-color: white;
+  color : black;
+}

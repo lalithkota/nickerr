@@ -33,7 +33,7 @@ router.get('/',
 
 router.post('/',function(req, res, next){
   if(req.body.nicker_text===''){
-    res.send();
+    res.end();
     return;
   }
   Nicker.countDocuments(function (err, count) {
@@ -61,4 +61,8 @@ router.post('/',function(req, res, next){
   });
   res.redirect('/home');
 });
+
+router.post('/liked',function(req, res, next){
+});
+
 module.exports = router;
